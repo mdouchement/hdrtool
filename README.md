@@ -2,6 +2,8 @@
 
 A bunch of CLI tools for HDR (and LDR).
 
+It uses https://github.com/mdouchement/hdr package.
+
 ## Installation
 
 ```sh
