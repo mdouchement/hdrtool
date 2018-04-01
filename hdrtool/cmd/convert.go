@@ -10,6 +10,8 @@ import (
 	"github.com/mdouchement/hdr/crad"
 	"github.com/mdouchement/hdr/pfm"
 	"github.com/mdouchement/hdr/rgbe"
+	// Import HDR decoders
+	_ "github.com/mdouchement/tiff"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )

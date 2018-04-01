@@ -17,6 +17,7 @@ import (
 	_ "github.com/mdouchement/hdr/crad"
 	_ "github.com/mdouchement/hdr/pfm"
 	_ "github.com/mdouchement/hdr/rgbe"
+	_ "github.com/mdouchement/tiff"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
