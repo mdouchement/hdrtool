@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 
 	"github.com/mdouchement/hdr"
-	"github.com/mdouchement/hdr/crad"
-	"github.com/mdouchement/hdr/pfm"
-	"github.com/mdouchement/hdr/rgbe"
+	"github.com/mdouchement/hdr/codec/crad"
+	"github.com/mdouchement/hdr/codec/pfm"
+	"github.com/mdouchement/hdr/codec/rgbe"
 	// Import HDR decoders
 	_ "github.com/mdouchement/tiff"
 	"github.com/pkg/errors"
