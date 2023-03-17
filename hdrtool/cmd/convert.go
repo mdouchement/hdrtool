@@ -7,9 +7,10 @@ import (
 	"path/filepath"
 
 	"github.com/mdouchement/hdr"
-	"github.com/mdouchement/hdr/codec/crad"
+	"github.com/mdouchement/hdr/codec/hli"
 	"github.com/mdouchement/hdr/codec/pfm"
 	"github.com/mdouchement/hdr/codec/rgbe"
+
 	// Import HDR decoders
 	_ "github.com/mdouchement/tiff"
 	"github.com/pkg/errors"
@@ -28,7 +29,7 @@ var (
 	toxyze bool
 	torgbe bool
 	tohdr  bool
-	tocrad bool
+	tohli  bool
 	topfm  bool
 )
 
@@ -36,7 +37,7 @@ func init() {
 	ConvertCommand.Flags().BoolVarP(&toxyze, "to-xyze", "", false, "Converts to Radiance XYZE")
 	ConvertCommand.Flags().BoolVarP(&torgbe, "to-rgbe", "", false, "Converts to Radiance RGBE")
 	ConvertCommand.Flags().BoolVarP(&tohdr, "to-hdr", "", false, "Converts to Radiance RGBE/XYZE")
-	ConvertCommand.Flags().BoolVarP(&tocrad, "to-crad", "", false, "Converts to CRAD")
+	ConvertCommand.Flags().BoolVarP(&tohli, "to-hli", "", false, "Converts to HLI")
 	ConvertCommand.Flags().BoolVarP(&topfm, "to-pfm", "", false, "Converts to PFM")
 }
 
@@ -47,19 +48,19 @@ func convertAction(c *cobra.Command, args []string) error {
 
 	fi, err := os.Open(args[0])
 	if err != nil {
-		return errors.Wrap(err, "convert:")
+		return errors.Wrap(err, "convert")
 	}
 	defer fi.Close()
 
 	m, fname, err := image.Decode(fi)
 	if err != nil {
-		return errors.Wrap(err, "convert:")
+		return errors.Wrap(err, "convert")
 	}
 	fmt.Printf("Read image (%dx%dp - %s) %s\n", m.Bounds().Dx(), m.Bounds().Dy(), fname, filepath.Base(args[0]))
 
 	fo, err := os.Create(args[1])
 	if err != nil {
-		return errors.Wrap(err, "convert:")
+		return errors.Wrap(err, "convert")
 	}
 	defer fo.Close()
 	fmt.Printf("Write image (%dx%dp - %s) %s\n", m.Bounds().Dx(), m.Bounds().Dy(), fname, filepath.Base(args[1]))
@@ -72,8 +73,8 @@ func convertAction(c *cobra.Command, args []string) error {
 		rgbe.Encode(fo, toRGB(hdrm))
 	case tohdr:
 		rgbe.Encode(fo, hdrm)
-	case tocrad:
-		crad.Encode(fo, hdrm)
+	case tohli:
+		hli.Encode(fo, hdrm)
 	case topfm:
 		pfm.Encode(fo, hdrm)
 	default:

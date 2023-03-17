@@ -15,7 +15,7 @@ import (
 	"github.com/mdouchement/hdrtool"
 
 	// Import HDR codecs
-	_ "github.com/mdouchement/hdr/codec/crad"
+	_ "github.com/mdouchement/hdr/codec/hli"
 	_ "github.com/mdouchement/hdr/codec/pfm"
 	_ "github.com/mdouchement/hdr/codec/rgbe"
 	_ "github.com/mdouchement/tiff"
